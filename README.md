@@ -1,2 +1,2 @@
 # DSA-Notes
-DS Notes for dummied
+DSA Notes for dummies
