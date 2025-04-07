@@ -81,34 +81,51 @@ To convert a binary number to decimal:
 ```
 
 #### Implementation: Decimal to Binary Conversion
-```python
-def convert_to_binary(n):
-    result = ""
-    while n != 0:  # Continue until n becomes 0
-        if n % 2 == 1:
-            result = "1" + result  # Add "1" if remainder is 1
-        else:
-            result = "0" + result  # Add "0" if remainder is 0
-        n //= 2  # Integer division by 2
-    return result if result else "0"  # Handle case where n=0
+```cpp
+#include <string>
+
+std::string convertToBinary(int n) {
+    std::string result = "";
+    
+    // Handle case where n=0
+    if (n == 0) {
+        return "0";
+    }
+    
+    while (n != 0) {
+        if (n % 2 == 1) {
+            result = "1" + result;  // Add "1" if remainder is 1
+        } else {
+            result = "0" + result;  // Add "0" if remainder is 0
+        }
+        n /= 2;  // Integer division by 2
+    }
+    
+    return result;
+}
 ```
 
 **Time Complexity**: O(log₂ n) - We divide by 2 repeatedly
 **Space Complexity**: O(log₂ n) - The resulting string length is proportional to log₂ n
 
 #### Implementation: Binary to Decimal Conversion
-```python
-def convert_to_decimal(binary_str):
-    number = 0
-    power_of_two = 1  # Starting with 2⁰
+```cpp
+#include <string>
+
+int convertToDecimal(const std::string& binaryStr) {
+    int number = 0;
+    int powerOfTwo = 1;  // Starting with 2⁰
     
-    # Iterate from right to left
-    for i in range(len(binary_str)-1, -1, -1):
-        if binary_str[i] == '1':
-            number += power_of_two
-        power_of_two *= 2  # Multiply by 2 for each position
+    // Iterate from right to left
+    for (int i = binaryStr.length() - 1; i >= 0; i--) {
+        if (binaryStr[i] == '1') {
+            number += powerOfTwo;
+        }
+        powerOfTwo *= 2;  // Multiply by 2 for each position
+    }
     
-    return number
+    return number;
+}
 ```
 
 **Time Complexity**: O(n) - where n is the length of the binary string
@@ -248,58 +265,85 @@ This is how `-3` is actually stored in memory.
 
 ### Example 1: Binary Conversion Functions
 
-```python
-def decimal_to_binary(decimal_num):
-    """Convert decimal to binary string"""
-    if decimal_num == 0:
-        return "0"
-        
-    binary = ""
-    while decimal_num > 0:
-        binary = str(decimal_num % 2) + binary
-        decimal_num //= 2
-    return binary
+```cpp
+#include <iostream>
+#include <string>
 
-def binary_to_decimal(binary_str):
-    """Convert binary string to decimal integer"""
-    decimal = 0
-    for digit in binary_str:
-        decimal = decimal * 2 + int(digit)
-    return decimal
+std::string decimalToBinary(int decimalNum) {
+    /* Convert decimal to binary string */
+    if (decimalNum == 0) {
+        return "0";
+    }
+    
+    std::string binary = "";
+    while (decimalNum > 0) {
+        binary = std::to_string(decimalNum % 2) + binary;
+        decimalNum /= 2;
+    }
+    return binary;
+}
 
-# Example usage
-print(decimal_to_binary(13))  # Output: 1101
-print(binary_to_decimal("1101"))  # Output: 13
+int binaryToDecimal(const std::string& binaryStr) {
+    /* Convert binary string to decimal integer */
+    int decimal = 0;
+    for (char digit : binaryStr) {
+        decimal = decimal * 2 + (digit - '0');
+    }
+    return decimal;
+}
+
+// Example usage
+int main() {
+    std::cout << decimalToBinary(13) << std::endl;  // Output: 1101
+    std::cout << binaryToDecimal("1101") << std::endl;  // Output: 13
+    return 0;
+}
 ```
 
 ### Example 2: Checking if a number is odd or even using bitwise operators
 
-```python
-def is_odd(n):
-    """
-    Returns True if n is odd, False otherwise
-    Using bitwise AND with 1 checks the least significant bit
-    """
-    return (n & 1) == 1
+```cpp
+#include <iostream>
 
-# Example usage
-print(is_odd(5))  # Output: True
-print(is_odd(10))  # Output: False
+bool isOdd(int n) {
+    /**
+     * Returns true if n is odd, false otherwise
+     * Using bitwise AND with 1 checks the least significant bit
+     */
+    return (n & 1) == 1;
+}
+
+// Example usage
+int main() {
+    std::cout << std::boolalpha;  // Print true/false instead of 1/0
+    std::cout << isOdd(5) << std::endl;  // Output: true
+    std::cout << isOdd(10) << std::endl;  // Output: false
+    return 0;
+}
 ```
 
 ### Example 3: Counting set bits (1s) in an integer
 
-```python
-def count_set_bits(n):
-    """Count the number of 1's in the binary representation of n"""
-    count = 0
-    while n:
-        count += n & 1  # Check if least significant bit is 1
-        n >>= 1         # Right shift by 1
-    return count
+```cpp
+#include <iostream>
 
-# Example usage
-print(count_set_bits(13))  # Output: 3 (13 is 1101 in binary)
+int countSetBits(int n) {
+    /**
+     * Count the number of 1's in the binary representation of n
+     */
+    int count = 0;
+    while (n) {
+        count += n & 1;  // Check if least significant bit is 1
+        n >>= 1;         // Right shift by 1
+    }
+    return count;
+}
+
+// Example usage
+int main() {
+    std::cout << countSetBits(13) << std::endl;  // Output: 3 (13 is 1101 in binary)
+    return 0;
+}
 ```
 
 ## Interview Preparation Tips
@@ -342,7 +386,7 @@ print(count_set_bits(13))  # Output: 3 (13 is 1101 in binary)
 
 3. **Overlooking integer overflow**: Operations like left shift can easily cause overflow if not careful.
 
-4. **Misinterpreting right shift results with negative numbers**: In some languages, right shift on negative numbers performs arithmetic shift (preserving sign bit).
+4. **Misinterpreting right shift results with negative numbers**: In C++, right shift on negative numbers performs arithmetic shift (preserving sign bit).
 
 5. **Incorrectly calculating binary-decimal conversions**: Double-check your conversions by working through the examples step by step.
 
