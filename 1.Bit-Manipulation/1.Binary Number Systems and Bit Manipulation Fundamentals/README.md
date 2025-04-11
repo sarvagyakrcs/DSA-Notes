@@ -244,22 +244,38 @@ This is how `-3` is actually stored in memory.
 
 **Warning**: Left shifts can cause overflow if the result exceeds the maximum representable integer
 
-#### NOT Operator (~)
-- **Operation**: Flips all bits (ones complement)
-- For a negative result, the computer automatically converts to twos complement
-- **Example**: ~5
-  ```
-  5:   0000...0101
-  Flip: 1111...1010 (Sign bit is 1, indicating negative)
-  ```
-  Then convert to twos complement to get final answer:
-  ```
-  Ones complement: 0000...0101
-  Add 1:           0000...0110 (6)
-  Result:          -6
-  ```
+# Bitwise NOT Operator (~)
 
-**Formula**: ~x = -(x+1)
+## Basic Operation
+The NOT operator (`~`) performs a bitwise complement operation, which means it flips each bit in the operand (changes 0s to 1s and 1s to 0s).
+
+## Key Concept
+When working with signed integers, the result appears in two's complement form, which is how computers represent negative numbers.
+
+## Example: ~5
+
+### Step 1: Binary Representation
+```
+5 in binary: 00000000 00000000 00000000 00000101
+```
+
+### Step 2: Apply NOT Operation (Flip All Bits)
+```
+After NOT: 11111111 11111111 11111111 11111010
+```
+This result has a 1 in the sign bit position, which indicates a negative number.
+
+### Step 3: Interpret the Result
+In two's complement representation, this equals -6.
+
+## The Simple Formula
+For any integer x:
+```
+~x = -(x+1)
+```
+
+## Verification
+~5 = -(5+1) = -6 ✓
 
 ## Practical Examples
 
