@@ -244,7 +244,7 @@ This is how `-3` is actually stored in memory.
 
 **Warning**: Left shifts can cause overflow if the result exceeds the maximum representable integer
 
-# Bitwise NOT Operator (~)
+#### Bitwise NOT Operator (~)
 
 ## Basic Operation
 The NOT operator (`~`) performs a bitwise complement operation, which means it flips each bit in the operand (changes 0s to 1s and 1s to 0s).
