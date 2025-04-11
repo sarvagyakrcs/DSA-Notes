@@ -2,7 +2,7 @@
 
 This is part of the Bit Manipulation series. Previously, we covered introduction to binary representation and basic bitwise operators. Now, we'll discuss common bit manipulation techniques used in competitive programming and interview questions.
 
-## Real-life example of Bit Manipulation:
+## Real-life example of Bit Manipulation
 
 **Problem statement:** Modern computers process data at the binary level, and understanding bit manipulation can help optimize memory usage and improve performance in various applications.
 
@@ -21,7 +21,7 @@ This is part of the Bit Manipulation series. Previously, we covered introduction
 * Computers perform bitwise operations much faster than equivalent arithmetic operations
 * Many competitive programmers use these techniques to optimize their solutions
 
-## Common Bit Manipulation Techniques:
+## Common Bit Manipulation Techniques
 
 ### 1. Swapping Two Numbers
 
@@ -171,58 +171,41 @@ int countSetBits(int n) {
 
 The second method is more efficient because it only iterates as many times as there are set bits, rather than checking all bits.
 
-Brian Kernighan's Algorithm for Counting Set Bits
-Method 2: Brian Kernighan's Algorithm
-cppint countSetBits(int n) {
-    int count = 0;
-    while (n > 0) {
-        n = n & (n - 1);  // Clears the rightmost set bit
-        count++;
-    }
-    return count;
-}
+## Brian Kernighan's Algorithm for Counting Set Bits
 
-The "Eating" Analogy
+### The "Eating" Analogy
 Brian Kernighan's algorithm can be understood through a simple "eating" analogy:
 
-Think of the operation n & (n-1) as a "bit eater" that always chomps off exactly one bit - specifically the rightmost set bit (1) in your binary number
-In each iteration, the bit eater takes one bite, removing exactly one set bit from the number
-You count each bite (increment count)
-When there are no more set bits to eat (n becomes 0), you know exactly how many set bits were in the original number
+* Think of the operation n & (n-1) as a "bit eater" that always chomps off exactly one bit - specifically the rightmost set bit (1) in your binary number
+* In each iteration, the bit eater takes one bite, removing exactly one set bit from the number
+* You count each bite (increment count)
+* When there are no more set bits to eat (n becomes 0), you know exactly how many set bits were in the original number
 
-Why This Works
+### Why This Works
 When you calculate n-1, it flips the rightmost set bit to 0 and all bits to the right of it to 1. Then when you perform n & (n-1):
 
-The rightmost set bit becomes 0 (as 1 & 0 = 0)
-All bits to the right remain 0 (as 0 & 1 = 0)
-All other bits remain unchanged
+* The rightmost set bit becomes 0 (as 1 & 0 = 0)
+* All bits to the right remain 0 (as 0 & 1 = 0)
+* All other bits remain unchanged
 
-Example
+### Example
 For n = 13 (binary 1101):
 
-First iteration: 1101 & 1100 = 1100, count = 1
+**First iteration:** 1101 & 1100 = 1100, count = 1
+* Ate the rightmost set bit (removed the rightmost 1)
 
-Ate the rightmost set bit (removed the rightmost 1)
+**Second iteration:** 1100 & 1011 = 1000, count = 2
+* Ate the next set bit
 
+**Third iteration:** 1000 & 0111 = 0000, count = 3
+* Ate the last set bit, n is now 0, so we exit the loop
 
-Second iteration: 1100 & 1011 = 1000, count = 2
+### Efficiency
+* Time complexity: O(k) where k is the number of set bits
+* This is more efficient than checking all bits (which would be O(log n) for an n-bit integer)
+* For sparse bit patterns, this algorithm significantly outperforms the naive approach
 
-Ate the next set bit
-
-
-Third iteration: 1000 & 0111 = 0000, count = 3
-
-Ate the last set bit, n is now 0, so we exit the loop
-
-
-
-Efficiency
-
-Time complexity: O(k) where k is the number of set bits
-This is more efficient than checking all bits (which would be O(log n) for an n-bit integer)
-For sparse bit patterns, this algorithm significantly outperforms the naive approach
-
-## Time and Space Complexity Analysis:
+## Time and Space Complexity Analysis
 
 For all the operations described above:
 - **Time Complexity:** O(1) for individual operations, as they work directly with the bits
@@ -232,7 +215,7 @@ For counting set bits:
 - **Method 1:** O(log n) or O(number of bits)
 - **Method 2:** O(number of set bits), which is usually much smaller than log n
 
-## Edge Cases and Optimizations:
+## Edge Cases and Optimizations
 
 * **Negative numbers**: In signed integer representations, be careful with sign bits
 * **Overflow**: Be cautious when working with numbers close to the integer limits
