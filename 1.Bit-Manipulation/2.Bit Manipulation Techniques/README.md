@@ -171,6 +171,57 @@ int countSetBits(int n) {
 
 The second method is more efficient because it only iterates as many times as there are set bits, rather than checking all bits.
 
+Brian Kernighan's Algorithm for Counting Set Bits
+Method 2: Brian Kernighan's Algorithm
+cppint countSetBits(int n) {
+    int count = 0;
+    while (n > 0) {
+        n = n & (n - 1);  // Clears the rightmost set bit
+        count++;
+    }
+    return count;
+}
+
+The "Eating" Analogy
+Brian Kernighan's algorithm can be understood through a simple "eating" analogy:
+
+Think of the operation n & (n-1) as a "bit eater" that always chomps off exactly one bit - specifically the rightmost set bit (1) in your binary number
+In each iteration, the bit eater takes one bite, removing exactly one set bit from the number
+You count each bite (increment count)
+When there are no more set bits to eat (n becomes 0), you know exactly how many set bits were in the original number
+
+Why This Works
+When you calculate n-1, it flips the rightmost set bit to 0 and all bits to the right of it to 1. Then when you perform n & (n-1):
+
+The rightmost set bit becomes 0 (as 1 & 0 = 0)
+All bits to the right remain 0 (as 0 & 1 = 0)
+All other bits remain unchanged
+
+Example
+For n = 13 (binary 1101):
+
+First iteration: 1101 & 1100 = 1100, count = 1
+
+Ate the rightmost set bit (removed the rightmost 1)
+
+
+Second iteration: 1100 & 1011 = 1000, count = 2
+
+Ate the next set bit
+
+
+Third iteration: 1000 & 0111 = 0000, count = 3
+
+Ate the last set bit, n is now 0, so we exit the loop
+
+
+
+Efficiency
+
+Time complexity: O(k) where k is the number of set bits
+This is more efficient than checking all bits (which would be O(log n) for an n-bit integer)
+For sparse bit patterns, this algorithm significantly outperforms the naive approach
+
 ## Time and Space Complexity Analysis:
 
 For all the operations described above:
