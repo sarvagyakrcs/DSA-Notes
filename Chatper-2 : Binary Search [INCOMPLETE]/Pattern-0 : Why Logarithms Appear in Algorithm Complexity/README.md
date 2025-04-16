@@ -1,4 +1,4 @@
-# Chapter Title: Why Logarithms Appear in Algorithm Complexity
+# Why Logarithms Appear in Algorithm Complexity
 
 ## Overview
 This chapter explores the fundamental role of logarithms in computational complexity analysis. We examine why logarithmic time complexity (log(n)) frequently appears in search algorithms and why many efficient sorting algorithms have n·log(n) complexity. Understanding these logarithmic relationships provides key insights into algorithm design and performance evaluation, forming the foundation for analyzing both basic and advanced algorithms.
