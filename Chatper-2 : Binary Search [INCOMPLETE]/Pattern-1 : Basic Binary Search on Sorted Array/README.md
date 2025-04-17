@@ -51,6 +51,7 @@ Binary search is an efficient searching algorithm that works on sorted collectio
 4. If target < middle element, search in the left half: `high = mid - 1`
 5. If target > middle element, search in the right half: `low = mid + 1`
 6. Repeat until the element is found or the search space is exhausted
+  > I mean there are no elements to search, what will we search hence we terminate. 
 
 #### Termination Conditions
 - **Success**: Element found at `mid` index
